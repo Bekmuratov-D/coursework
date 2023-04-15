@@ -1,13 +1,16 @@
 from django.shortcuts import render
 from django.db.models import Q
 
-
+from rest_framework import viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from rest_framework.filters import OrderingFilter, SearchFilter
+
 
 from .models import Product, Category
-from .serializers import ProductSerializer, CategorySerializer
+from .serializers import *
+
 
 class LatestProductsList(APIView):
     def get(self, request, format=None):
@@ -49,3 +52,16 @@ def search(request):
         return Response(serializer.data)
     else:
         return Response({"products": []})
+
+
+class Category_tableViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    filter_backends = [OrderingFilter, SearchFilter]
+    search_fields = ['name']
+
+class Products_tableViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    filter_backends = [OrderingFilter, SearchFilter]
+    search_fields = ['name']

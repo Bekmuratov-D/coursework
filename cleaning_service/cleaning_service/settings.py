@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-ujt&-p4u#@77q)4!a!zu^be&nyjn)d7444wm72aed#13^$z*fw
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+STRIPE_SECRET_KEY = 'sk_test_51MvcTxGYFYPdwzkancW8keTAj7jxJfKvpxuYLawmM8ArfAKwYfgVcWgWTLq68Q4ksw2jgtXPCKG3CfQQ6HIO61N700hy35FGYT'
 
 # Application definition
 
@@ -42,8 +42,12 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'djoser',
+    'django_filters',
+    'simple_history',
+    'import_export',
 
     'product',
+    'order',
 ]
 
 CORS_ALLOWED_ORIGINS = [
@@ -136,3 +140,10 @@ MEDIA_ROOT = BASE_DIR / 'media/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 3,
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}

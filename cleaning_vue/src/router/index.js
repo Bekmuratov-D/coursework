@@ -10,6 +10,8 @@ import Cart from '../views/Cart.vue'
 import SingUp from '../views/SingUp.vue'
 import LogIn from '../views/LogIn.vue'
 import MyAccount from '../views/MyAccount.vue'
+import Checkout from '../views/Checkout.vue'
+import Success from '../views/Success.vue'
 
 const routes = [
   {
@@ -31,9 +33,22 @@ const routes = [
     component: Search
   },
   {
+    path: '/cart/checkout',
+    name: 'Checkout',
+    component: Checkout,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
     path: '/log-in',
     name: 'LogIn',
     component: LogIn
+  },
+  {
+    path: '/cart/success',
+    name: 'Success',
+    component: Success
   },
   {
     path: '/my-account',

@@ -27,3 +27,15 @@ class CategorySerializer(serializers.ModelSerializer):
             "get_absolute_url",
             "products",
         )
+
+
+class Category_tableSerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = Category
+        fields = (
+            "id",
+            "name",
+            "get_absolute_url",
+            "products",
+        )

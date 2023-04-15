@@ -1,5 +1,6 @@
 from io import BytesIO
 from PIL import Image
+from simple_history.models import HistoricalRecords
 
 from django.core.files import File
 from django.db import models
@@ -7,6 +8,7 @@ from django.db import models
 class Category(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField()
+    history = HistoricalRecords()
 
     class Meta:
         ordering = ('name',)
@@ -27,6 +29,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to='uploads/', blank=True, null=True)
     thumbnail = models.ImageField(upload_to='uploads/', blank=True, null=True)
     date_added = models.DateTimeField(auto_now_add=True)
+    history = HistoricalRecords()
 
     class Meta:
         ordering = ('-date_added',)
@@ -58,7 +61,7 @@ class Product(models.Model):
         img.convert('RGB')
         img.thumbnail(size)
 
-        thumb_io = с()
+        thumb_io = BytesIO()
         img.save(thumb_io, 'JPEG', quality=85)
 
         thumbnail = File(thumb_io, name=image.name)

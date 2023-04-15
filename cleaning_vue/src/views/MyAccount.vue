@@ -42,16 +42,16 @@
             this.getMyOrders()
         },
         methods: {
-            logout() {
-                axios.defaults.headers.common["Authorization"] = ""
-                localStorage.removeItem("token")
-                localStorage.removeItem("username")
-                localStorage.removeItem("userid")
-                this.$store.commit('removeToken')
-                this.$router.push('/')
-            },
+            // logout() {
+            //     axios.defaults.headers.common["Authorization"] = ""
+            //     localStorage.removeItem("token")
+            //     localStorage.removeItem("username")
+            //     localStorage.removeItem("userid")
+            //     this.$store.commit('removeToken')
+            //     this.$router.push('/')
+            // },
             async getMyOrders() {
-                this.$store.commit('setIsLoading', true)
+                // this.$store.commit('setIsLoading', false)
                 await axios
                     .get('/api/v1/orders/')
                     .then(response => {
@@ -60,7 +60,7 @@
                     .catch(error => {
                         console.log(error)
                     })
-                this.$store.commit('setIsLoading', false)
+                // this.$store.commit('setIsLoading', false)
             }
         }
     }
